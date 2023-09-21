@@ -4,7 +4,7 @@
 
 // I had to go to youtube for this one but the key insight here is that you want to sort the intervals by the end of the interval,
 // not by the start. From there, you keep track of the furthest valid endpoint, and loop through each interval. If the interval's start
-// is less than the current max endpoint, discard it. Otherwise, the interval is the new endpoint. Time complexity O(log(n)) I think due
+// is less than the current max endpoint, discard it. Otherwise, the interval is the new endpoint. Time complexity O(nlog(n)) I think due
 // to the sort function. Space complexity should be O(1).
 
 
