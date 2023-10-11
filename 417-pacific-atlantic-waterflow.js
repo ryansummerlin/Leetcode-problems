@@ -61,3 +61,74 @@ var pacificAtlantic = function(heights) {
     return result;
 
 };
+
+
+// This one is still tripping me up even after looking at the solution online. I hate graph problems!!
+
+var pacificAtlantic = function(heights) {
+    let pacific = heights.map(row => row.map(el => false));
+    let atlantic = heights.map(row => row.map(el => false));
+
+    const getNeighbors = function(i, j, grid) {
+        let neighbors = [];
+        let val = heights[i][j];
+        if (i > 0 && heights[i - 1][j] <= val && !grid[i - 1][j]) neighbors.push([i - 1, j]);
+        if (i < heights.length - 1 && heights[i + 1][j] <= val && !grid[i + 1][j]) neighbors.push([i + 1, j]);
+        if (j > 0 && heights[i][j - 1] <= val && !grid[i][j - 1]) neighbors.push([i, j - 1]);
+        if (j < heights[0].length - 1 && heights[i][j + 1] <= val && !grid[i][j + 1]) neighbors.push([i, j + 1]);
+
+        return neighbors;
+    }
+
+    const atlanticBFS = function() {
+        let queue = [];
+        for (let i = 0; i < heights.length; i++) {
+            queue.push([i, heights[0].length - 1]);
+        }
+        for (let j = 0; j < heights[0].length; j++) {
+            queue.push([heights.length - 1, j]);
+        }
+        while (queue.length) {
+            let square = queue.shift();
+            let [i, j] = [square[0], square[1]];
+            atlantic[i][j] = true;
+            let neighbors = getNeighbors(i, j, atlantic);
+            for (let i = 0; i < neighbors.length; i++) {
+                queue.push(neighbors[i]);
+            }
+        }
+    }
+
+
+    const pacificBFS = function() {
+        let queue = [];
+        for (let i = 0; i < heights.length; i++) {
+            queue.push([i, 0]);
+        }
+        for (let j = 0; j < heights[0].length; j++) {
+            queue.push([0, j]);
+        }
+        while (queue.length) {
+            let square = queue.shift();
+            let [i, j] = [square[0], square[1]];
+            pacific[i][j] = true;
+            let neighbors = getNeighbors(i, j, pacific);
+            for (let i = 0; i < neighbors.length; i++) {
+                queue.push(neighbors[i]);
+            }
+        }
+    }
+
+    atlanticBFS();
+    pacificBFS();
+
+    let result = [];
+    for (let i = 0; i < heights.length; i++) {
+        for (let j = 0; j < heights[0].length; j++) {
+            if (pacific[i][j] && atlantic[i][j]) result.push([i, j]);
+        }
+    }
+
+    return result;
+
+};
