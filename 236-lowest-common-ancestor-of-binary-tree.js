@@ -6,7 +6,7 @@
 
 
 
-// This is my original solution - I struggled a bit with figuring out the depth first search for a target and had to
+// This is my origwhatinal solution - I struggled a bit with figuring out the depth first search for a target and had to
 // go to chat gpt but the idea, basically, is that you do a breadth first search, and at every node you do a depth
 // first search for the target. If the node contains the target, then you push it to a result array and at the very end
 // you just pull the last node in the result array. However, this gets terrible time complexity so I'm going to look
