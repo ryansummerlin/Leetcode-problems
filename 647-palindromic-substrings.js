@@ -14,6 +14,11 @@
 // each palindrome. Finally, I returned the count. Time complexity here is terrible (I think O(n^3)). Space complexity
 // isn't terrible but it's not great either - should be O(n)
 
+
+// Update: I'm lazy and dont' want to map it out but the optimal way to do this is to start with the middle of the palindrome
+// instead of the ends. Basically, loop through the entire function with two pointers going opposite directions. As long as they
+// stay equal you increment count by one. This is time complexity O(n^2) and should be space complexity O(1).
+
 var countSubstrings = function(s) {
     const checkPalindrome = function(str) {
       let start = 0;
