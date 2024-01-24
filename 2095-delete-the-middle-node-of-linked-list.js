@@ -33,3 +33,27 @@ var deleteMiddle = function(head) {
 
     return head;
 };
+
+
+// As a bonus, found this solution online as well - had basically the correct idea but the solution confirmed it. This one
+// is a bit quicker and uses a fast/slow pointer. Once the fast pointer hits null, the slow pointer should be on the midpoint
+// and the prevNode will be the node before the slow pointer. Then, you set prevNode.next to slow.next and have the solution.
+// Still O(n) but you get rid of the second iteration through the linked list to get back to the midpoint
+
+
+var deleteMiddle = function(head) {
+    let slow = head;
+    let fast = head;
+    let prevNode = null;
+
+    while (fast && fast.next) {
+        prevNode = slow;
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+
+    if (!prevNode) return null;
+    prevNode.next = slow.next;
+
+    return head;
+};
