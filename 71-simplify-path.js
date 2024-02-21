@@ -54,3 +54,20 @@ var simplifyPath = function(path) {
 
 
 };
+
+
+
+// much more elegant solution from online. Splits components with '/' and loops through the array checking for blanks or single periods
+// wrinkle I missed above is '..' means move up a level so you need to pop the last value off of the array. Time complexity O(n).
+
+var simplifyPath = function (path) {
+    const simplifiedPath = [];
+    const dirs = path.split("/");
+
+    for (const dir of dirs) {
+      if (dir === "" || dir === ".") continue;
+      dir === ".." ? simplifiedPath.pop() : simplifiedPath.push(dir);
+    }
+
+    return "/" + simplifiedPath.join("/");
+  };
